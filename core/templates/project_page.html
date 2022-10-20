@@ -4,7 +4,9 @@
     <h4 class="text-center my-3 pb-3">Список проектов</h4>
     <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
         <div class="col-12">
+            {% if user.is_authenticated %}
             <a href="{% url 'add_project' %}" type="submit" class="btn btn-primary">Добавить</a>
+            {% endif %}
             <a href="{% url 'main' %}" type="submit" class="btn btn-primary">Задачи</a>
         </div>
     </form>

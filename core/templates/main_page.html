@@ -6,6 +6,17 @@
     <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
         <div class="col-12">
             <a href="{% url 'projects' %}" type="submit" class="btn btn-primary">Проекты</a>
+            {% if user.is_authenticated %}
+
+
+                <a href="{% url 'logout' %}" type="submit" class="btn btn-primary">Выход</a>
+
+                <li class="menu-right">Привет, {{ user.username }}!</li>
+
+            {% else %}
+                <a href="{% url 'login' %}" type="submit" class="btn btn-primary">Вход</a>
+
+            {% endif %}
         </div>
     </form>
     <table class="table mb-4">
