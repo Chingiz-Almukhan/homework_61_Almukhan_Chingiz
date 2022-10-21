@@ -10,9 +10,7 @@ class LoginView(TemplateView):
     template_name = 'login.html'
 
     def get(self, request, *args, **kwargs):
-        next = request.GET.get('next')
-        form_data = {} if not next else {'next': next}
-        form = self.form(form_data)
+        form = self.form()
         context = {'form': form}
         return self.render_to_response(context)
 
@@ -22,14 +20,11 @@ class LoginView(TemplateView):
             return redirect('login')
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
-        next = form.cleaned_data.get('next', None)
         user = authenticate(request, username=username,
                             password=password)
         if not user:
             return redirect('login')
         login(request, user)
-        if next:
-            return redirect(next)
         return redirect('main')
 
 
