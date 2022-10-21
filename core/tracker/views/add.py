@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
@@ -5,7 +6,7 @@ from tracker.forms import AddEditForm
 from tracker.models import IssueTracker, Project
 
 
-class AddView(CreateView):
+class AddView(LoginRequiredMixin, CreateView):
     template_name = 'add_task.html'
     success_url = reverse_lazy('main')
     model = IssueTracker

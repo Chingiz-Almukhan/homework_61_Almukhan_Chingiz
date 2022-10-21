@@ -28,11 +28,11 @@ class IndexView(ListView):
         return context
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(is_deleted=False)
+        queryset = super().get_queryset()
         if self.search_value:
             query = Q(summary__icontains=self.search_value) | Q(description__icontains=self.search_value)
             queryset = queryset.filter(query)
-        return queryset
+        return queryset.filter(is_deleted=False)
 
     def get_search_form(self):
         return SearchForm(self.request.GET)

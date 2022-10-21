@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
@@ -6,7 +6,7 @@ from tracker.forms import AddEditForm
 from tracker.models.issue_tracker import IssueTracker
 
 
-class EditView(UpdateView):
+class EditView(LoginRequiredMixin, UpdateView):
     template_name = "edit_task.html"
     form_class = AddEditForm
     model = IssueTracker
